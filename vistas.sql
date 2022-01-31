@@ -4,9 +4,9 @@ select nombre as Pasatiempo,count(id_recomendaciones) as Se_recomienda from reco
 SELECT * FROM proyecto_tercera_rueda.recomendaciones;
 drop view recomendaciones;
 
-#Vista para mostrar los usuarios menores de edad 
+#Vista para mostrar los usuarios que no entran aun a la tercera edad 
 create view menoresusuarios as 
-select nombres,apellidos,edad_actual as edad from usuario where edad_actual < 18;
+select nombres,apellidos,edad_actual as edad from usuario where edad_actual < 80;
 SELECT * FROM proyecto_tercera_rueda.menoresusuarios;
 drop view menoresusuarios;
 
