@@ -25,6 +25,18 @@ call showMensaje("KEVIN ADONIS",@mensaje);
 select @mensaje;
 drop procedure showMensaje;
 
+#Procedimiento para mostrar los mensajes mandado por el usuario
+DELIMITER //
+CREATE PROCEDURE showMensaje(IN usuario VARCHAR(60))
+BEGIN
+SELECT mu.mensaje as mensajes_del_usuario FROM usuario u 
+inner join mensaje_usuario mu on  u.cedula = mu.emisor WHERE u.nombres = usuario;
+END //DELIMITER ;
+
+call showMensaje("KEVIN ADONIS");
+drop procedure showMensaje;
+
+
 #procedimiento para verificar si un usuario cumple para esa actividad
 DELIMITER $$
 CREATE PROCEDURE mayoredad(in cod int, in actividad varchar(50),
@@ -35,14 +47,19 @@ DECLARE edad_ini int;
 SELECT edad_actual into edad
 FROM usuario WHERE cedula = cod;
 
-SELECT edad_inical into edad_ini
+SELECT edad_inicial into edad_ini
 FROM actividades WHERE nombre = actividad;
 
 
-IF edad >= edad_iniclal
+IF edad >= edad_ini
 THEN SET mayoredad = 'CUMPLE LA EDAD PARA LA ACTIVIDAD';
-ELSEIF edad < edad_iniclal
+ELSEIF edad < edad_ini
 THEN SET mayoredad = 'NO CUMPLE LA EDAD PARA LA ACTIVIDAD';
 END IF;  
 END$$ 
 DELIMITER ;
+
+
+call mayoredad(0145871111,"SPINNIGN", @mensaje);
+select @mensaje;
+drop procedure mayoredad;
