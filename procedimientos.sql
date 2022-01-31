@@ -25,4 +25,24 @@ call showMensaje("KEVIN ADONIS",@mensaje);
 select @mensaje;
 drop procedure showMensaje;
 
+#procedimiento para verificar si un usuario cumple para esa actividad
+DELIMITER $$
+CREATE PROCEDURE mayoredad(in cod int, in actividad varchar(50),
+out	mayoredad varchar(100))  
+BEGIN
+DECLARE edad int;
+DECLARE edad_ini int;
+SELECT edad_actual into edad
+FROM usuario WHERE cedula = cod;
 
+SELECT edad_inical into edad_ini
+FROM actividades WHERE nombre = actividad;
+
+
+IF edad >= edad_iniclal
+THEN SET mayoredad = 'CUMPLE LA EDAD PARA LA ACTIVIDAD';
+ELSEIF edad < edad_iniclal
+THEN SET mayoredad = 'NO CUMPLE LA EDAD PARA LA ACTIVIDAD';
+END IF;  
+END$$ 
+DELIMITER ;
